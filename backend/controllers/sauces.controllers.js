@@ -1,6 +1,7 @@
 const Sauce = require('../models/sauces.models');
 const fs = require('fs');
 
+//Ajouter une nouvalle sauce pour l'app
 exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
   console.log(sauceObject);
@@ -15,6 +16,7 @@ exports.createSauce = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
+//Modifier une sauce de l'app
 exports.modifySauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
@@ -32,6 +34,7 @@ exports.modifySauce = (req, res, next) => {
     .catch(() => res.status(500).json({ error: 'Sauce introuvable' }));
 };
 
+//Supprimer une sauce de l'app
 exports.deleteSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
@@ -49,27 +52,32 @@ exports.deleteSauce = (req, res, next) => {
     .catch(() => res.status(500).json({ error: 'Sauce introuvable' }));
 };
 
+//Obtenir une sauce de l'app
 exports.getOneSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => res.status(200).json(sauce))
     .catch((error) => res.status(404).json({ error }));
 };
 
+//Obtenir toutes les sauces de l'app
 exports.getAllSauces = (req, res, next) => {
   Sauce.find()
     .then((sauces) => res.status(200).json(sauces))
     .catch((error) => res.status(404).json({ error }));
 };
 
+//Systeme de like et dislike
 exports.doYouLikeIt = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })
     .then((sauce) => {
       const userId = req.body.userId;
       const like = req.body.like;
 
+      //On filtre par utilisateur
       sauce.usersLiked = sauce.usersLiked.filter((el) => el !== userId);
       sauce.usersDisliked = sauce.usersDisliked.filter((el) => el !== userId);
 
+      //on push dans le tableau l'utilisateur par son id en fonction du like ou dislike
       if (like === 1) {
         sauce.usersLiked.push(userId);
       }
@@ -78,6 +86,7 @@ exports.doYouLikeIt = (req, res, next) => {
         sauce.usersDisliked.push(userId);
       }
 
+      //On relie le like/dislike avec le tableau
       sauce.likes = sauce.usersLiked.length;
       sauce.dislikes = sauce.usersDisliked.length;
 

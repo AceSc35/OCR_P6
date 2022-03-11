@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user.models');
 
+//Utilisation de JWT pour générer un token
+
+//Pour créer un utilisateur avec un mdp hashé, c'est à dire transformer un mdp en chaine de caractère pour plus de sécurité.
 exports.signup = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 10)
@@ -14,11 +17,12 @@ exports.signup = (req, res, next) => {
       user
         .save()
         .then(() => res.status(201).json({ message: 'utilisateur crée !' }))
-        .catch((error) => res.status(400).json({ error }));
+        .catch((error) => res.status(400).json({ message: 'Ce mail est déjà utilisé' }));
     })
-    .catch((error) => res.status(200).json({ error }));
+    .catch((error) => res.status(500).json({ error }));
 };
 
+//Pour permettre à l'utilisateur de se log
 exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
