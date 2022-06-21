@@ -1,4 +1,4 @@
-OpenClassrooms - Projet n°6 - Piiquante
+## OpenClassrooms - Projet n°6 - Piiquante
 
 Réalisation d'une API pour Piiquante. Piiquante se dédie à la création de sauces épicées dont les recettes sont gardées secrètes.
 
