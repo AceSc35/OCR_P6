@@ -1,23 +1,30 @@
-# HOT TAKES #
+OpenClassrooms - Projet n°6 - Piiquante
 
-## Installation ##
+Réalisation d'une API pour Piiquante. Piiquante se dédie à la création de sauces épicées dont les recettes sont gardées secrètes.
 
-Here are the dependancies you need to install:
-- NodeJS 12.14 or 14.0.
-- Angular CLI 7.0.2.
-- node-sass : make sure to use the corresponding version to NodeJS. For Noe 14.0 for instance, you need node-sass in version 4.14+.
+## Exigences de sécurité
 
-On Windows, these installations require to use PowerShell in administrator mode.
+- Le mot de passe de l'utilisateur doit être hashé
+- L'authentification doit être renforcée sur toutes les routes sauce requises
+- Les emails dans la base de données sont uniques et un plugin Mongoose approprié est utilisé pour garantir leur unicité et signaler les erreurs
+- La sécurité de la base de données MongoDB (à partir d'un service tel que MongoDB Atlas) ne doit pas empêcher l'application de se lancer sur la machine d'un utilisateur
+- Un plugin Mongoose doit assurer la remontée des erreurs issues de la base de données.
+- Les versions les plus récentes des logiciels sont utilisées avec des correctifs de sécurité actualisés.
+- Le contenu du dossier images ne doit pas être téléchargé sur GitHub.
 
-Then, clone this repo, run `npm install`, and run `npm install --save-dev run-script-os`.
 
+## Installation
 
-## Usage ##
+Backend (Node-Express-MongoDB)
+```bash
+  cd back
+  npm install
+  nodemon index
+```
 
-Run `npm start`. This should both run the local server and launch your browser.
-
-If your browser fails to launch, or shows a 404 error, navigate your browser to http://localhost:8080.
-
-The app should reload automatically when you make a change to a file.
-
-Use `Ctrl+C` in the terminal to stop the local server.
+Frontend (Angular)
+```bash
+  cd front
+  npm install
+  npm run start
+```
